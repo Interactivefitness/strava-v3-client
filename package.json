@@ -1,0 +1,39 @@
+{
+  "name": "@interactivefitness/strava-v3-client",
+  "version": "0.1.0",
+  "description": "Strava V3 Node Wrapper",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/interactivefitness/strava-v3-client.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "tag": "next"
+  },
+  "author": "Interactive Fitness Holdings, LLC",
+  "license": "MIT",
+  "dependencies": {
+    "swagger-client": "^3.9.5"
+  },
+  "devDependencies": {
+    "@pollyjs/adapter-node-http": "^2.6.3",
+    "@pollyjs/core": "^2.6.3",
+    "@pollyjs/persister-fs": "^2.6.3",
+    "jest": "^24.9.0",
+    "setup-polly-jest": "^0.6.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "bugs": {
+    "url": "https://github.com/interactivefitness/strava-v3-client/issues"
+  },
+  "homepage": "https://github.com/interactivefitness/strava-v3-client#readme",
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "strava"
+  ]
+}
