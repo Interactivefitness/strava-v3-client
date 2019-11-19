@@ -5,6 +5,9 @@
 ```bash
 npm install @interactivefitness/strava-v3-client
 ```
+## Description
+
+This Strava API client was generated from Strava's official Swagger API spec. See the [Strava API playground](https://developers.strava.com/playground/) to see what's supported. Note that methods for the OAuth flow are not provided. 
 
 ## Quick start
 
