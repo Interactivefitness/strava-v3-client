@@ -57,7 +57,7 @@
       "get": {
         "operationId": "getStats",
         "summary": "Get Athlete Stats",
-        "description": "Returns the activity stats of an athlete.",
+        "description": "Returns the activity stats of an athlete. Only includes data from activities set to Everyone visibilty.",
         "parameters": [
           {
             "name": "id",
@@ -65,12 +65,6 @@
             "description": "The identifier of the athlete. Must match the authenticated athlete.",
             "required": true,
             "type": "integer"
-          },
-          {
-            "$ref": "#/parameters/page"
-          },
-          {
-            "$ref": "#/parameters/perPage"
           }
         ],
         "tags": [
@@ -109,10 +103,10 @@
             "examples": {
               "application/json": {
                 "id": 1234567890987654321,
-                "username": "marianne_v",
+                "username": "marianne_t",
                 "resource_state": 3,
                 "firstname": "Marianne",
-                "lastname": "V.",
+                "lastname": "Teutenberg",
                 "city": "San Francisco",
                 "state": "CA",
                 "country": "US",
@@ -167,6 +161,9 @@
         "operationId": "updateLoggedInAthlete",
         "summary": "Update Athlete",
         "description": "Update the currently authenticated athlete. Requires profile:write scope.",
+        "consumes": [
+          "multipart/form-data"
+        ],
         "tags": [
           "Athletes"
         ],
@@ -377,10 +374,6 @@
                   37.8280722,
                   -122.4981393
                 ],
-                "start_latitude": 37.8331119,
-                "start_longitude": -122.4834356,
-                "end_latitude": 37.8280722,
-                "end_longitude": -122.4981393,
                 "climb_category": 1,
                 "city": "San Francisco",
                 "state": "CA",
@@ -460,10 +453,6 @@
                   37.8280722,
                   -122.4981393
                 ],
-                "start_latitude": 37.8331119,
-                "start_longitude": -122.4834356,
-                "end_latitude": 37.8280722,
-                "end_longitude": -122.4981393,
                 "climb_category": 1,
                 "city": "San Francisco",
                 "state": "CA",
@@ -550,10 +539,6 @@
                   37.8280722,
                   -122.4981393
                 ],
-                "start_latitude": 37.8331119,
-                "start_longitude": -122.4834356,
-                "end_latitude": 37.8280722,
-                "end_longitude": -122.4981393,
                 "climb_category": 1,
                 "city": "San Francisco",
                 "state": "CA",
@@ -670,7 +655,7 @@
           {
             "name": "date_range",
             "in": "query",
-            "description": "Filter by date range.",
+            "description": "Filter by date range, will be in the athlete's timezone",
             "type": "string",
             "enum": [
               "this_year",
@@ -800,10 +785,6 @@
                       53.02204074375785,
                       -3.2039630001245737
                     ],
-                    "start_latitude": 82.9858888581467,
-                    "start_longitude": -3.1869788881197367,
-                    "end_latitude": 43.022040343380785,
-                    "end_longitude": -13.2039639991245737,
                     "climb_category": 2,
                     "city": "Le Bourg D'Oisans",
                     "state": "RA",
@@ -982,10 +963,6 @@
                     37.808297909724,
                     -122.421324329674
                   ],
-                  "start_latitude": 37.80840654682,
-                  "start_longitude": -122.45682919323,
-                  "end_latitude": 37.80829000979624,
-                  "end_longitude": -122.42000324329674,
                   "climb_category": 0,
                   "city": "San Francisco",
                   "state": "CA",
@@ -1106,7 +1083,8 @@
             "name": "start_date_local",
             "in": "formData",
             "description": "ISO 8601 formatted date time.",
-            "type": "datetime",
+            "type": "string",
+            "format": "date-time",
             "required": true
           },
           {
@@ -1136,13 +1114,6 @@
             "in": "formData",
             "description": "Set to 1 to mark as a trainer activity.",
             "type": "integer",
-            "required": false
-          },
-          {
-            "name": "photo_ids",
-            "in": "formData",
-            "description": "List of native photo ids to attach to the activity.",
-            "type": "string[]",
             "required": false
           },
           {
@@ -1182,10 +1153,6 @@
                 "start_date_local": "2018-02-20T10:02:13Z",
                 "timezone": "(GMT-08:00) America/Los_Angeles",
                 "utc_offset": -28800,
-                "start_latlng": null,
-                "end_latlng": null,
-                "start_latitude": null,
-                "start_longitude": null,
                 "achievement_count": 0,
                 "kudos_count": 0,
                 "comment_count": 0,
@@ -1213,12 +1180,7 @@
                 "workout_type": null,
                 "description": null,
                 "calories": 0,
-                "segment_efforts": [],
-                "partner_brand_tag": null,
-                "highlighted_kudosers": [],
-                "embed_token": "e65c2a814xxxxxxxxxxxxxxxxx68",
-                "segment_leaderboard_opt_out": false,
-                "leaderboard_opt_out": false
+                "segment_efforts": []
               }
             }
           },
@@ -1289,8 +1251,6 @@
                   37.83,
                   -122.26
                 ],
-                "start_latitude": 37.83,
-                "start_longitude": -122.26,
                 "achievement_count": 0,
                 "kudos_count": 19,
                 "comment_count": 0,
@@ -1369,10 +1329,6 @@
                         37.8476261,
                         -122.2008944
                       ],
-                      "start_latitude": 37.8346153,
-                      "start_longitude": -122.2520872,
-                      "end_latitude": 37.8476261,
-                      "end_longitude": -122.2008944,
                       "climb_category": 3,
                       "city": "Oakland",
                       "state": "CA",
@@ -1533,8 +1489,6 @@
                 "location_city": null,
                 "location_state": null,
                 "location_country": "United States",
-                "start_latitude": 37.83,
-                "start_longitude": -122.26,
                 "achievement_count": 0,
                 "kudos_count": 19,
                 "comment_count": 0,
@@ -1613,10 +1567,6 @@
                         37.8476261,
                         -122.2008944
                       ],
-                      "start_latitude": 37.8346153,
-                      "start_longitude": -122.2520872,
-                      "end_latitude": 37.8476261,
-                      "end_longitude": -122.2008944,
                       "climb_category": 3,
                       "city": "Oakland",
                       "state": "CA",
@@ -1781,8 +1731,6 @@
                         "location_city": null,
                         "location_state": null,
                         "location_country": "United States",
-                        "start_latitude": null,
-                        "start_longitude": null,
                         "achievement_count": 0,
                         "kudos_count": 3,
                         "comment_count": 1,
@@ -1841,8 +1789,6 @@
                         "location_city": null,
                         "location_state": null,
                         "location_country": "United States",
-                        "start_latitude": null,
-                        "start_longitude": null,
                         "achievement_count": 0,
                         "kudos_count": 4,
                         "comment_count": 0,
@@ -2064,7 +2010,8 @@
             "in": "path",
             "description": "The identifier of the activity.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           {
             "$ref": "#/parameters/page"
@@ -2221,7 +2168,7 @@
     "/clubs/{id}/admins": {
       "get": {
         "operationId": "getClubAdminsById",
-        "summary": "List Club Administrators.",
+        "summary": "List Club Administrators",
         "description": "Returns a list of the administrators of a given club.",
         "parameters": [
           {
