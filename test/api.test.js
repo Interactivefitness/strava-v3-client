@@ -82,19 +82,8 @@ describe("Athletes", () => {
         expect(json).toHaveProperty('summit', expect.any(Boolean))
         expect(json).toHaveProperty('created_at', expect.any(String))
         expect(json).toHaveProperty('updated_at', expect.any(String))
-        expect(json).toHaveProperty('clubs', expect.any(Array))
-        expect(json).toHaveProperty('bikes', expect.any(Array))
-        expect(json).toHaveProperty('shoes', expect.any(Array))
-        expect(json).toHaveProperty('athlete_type', expect.any(Number))
         expect(json).toHaveProperty('badge_type_id', expect.any(Number))
-        expect(json).toHaveProperty('date_preference', expect.any(String))
-        expect(json).toHaveProperty('embed_token', expect.any(String))
-        expect(json).toHaveProperty('follower_count', expect.any(Number))
-        expect(json).toHaveProperty('friend_count', expect.any(Number))
-        expect(json).toHaveProperty('measurement_preference', expect.any(String))
-        expect(json).toHaveProperty('mutual_friend_count', expect.any(Number))
         expect(json).toHaveProperty('resource_state', expect.any(Number))
-        expect(json).toHaveProperty('weight', expect.any(Number))
       });
     });
   });
