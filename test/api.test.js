@@ -147,19 +147,22 @@ describe("Clubs", () => {
 
 describe("Gears", () => {
   let client;
+/*
   beforeAll(async() => {
     client = await strava;
   });
-
+*/
   describe("#getGearById()", () => {
   });
 });
 
-describe("Routes", () => {
+xdescribe("Routes", () => {
   let client;
+/*
   beforeAll(async() => {
     client = await strava;
   });
+*/
 
   describe("#getRoutesByAthleteId()", () => {
   });
@@ -173,9 +176,11 @@ describe("Routes", () => {
 
 describe("RunningRaces", () => {
   let client;
+/*
   beforeAll(async() => {
     client = await strava;
   });
+*/
 
   describe("#getRunningRaceById()", () => {
   });
@@ -185,9 +190,11 @@ describe("RunningRaces", () => {
 
 describe("SegmentEfforts", () => {
   let client;
+/*
   beforeAll(async() => {
     client = await strava;
   });
+*/
 
   describe("#getEffortsBySegmentId()", () => {
   });
@@ -195,11 +202,13 @@ describe("SegmentEfforts", () => {
   });
 });
 
-describe("Segments", () => {
+xdescribe("Segments", () => {
   let client;
+/*
   beforeAll(async() => {
     client = await strava;
   });
+*/
 
   describe("#exploreSegments()", () => {
   });
@@ -213,11 +222,13 @@ describe("Segments", () => {
   });
 });
 
-describe("Streams", () => {
+xdescribe("Streams", () => {
   let client;
+/*
   beforeAll(async() => {
     client = await strava;
   });
+*/
 
   describe("#getActivityStreams()", () => {
   });
@@ -231,9 +242,11 @@ describe("Streams", () => {
 
 describe("Uploads", () => {
   let client;
+/*
   beforeAll(async() => {
     client = await strava;
   });
+*/
 
   describe("#createUpload()", () => {
   });

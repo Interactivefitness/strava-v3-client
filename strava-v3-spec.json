@@ -41,7 +41,7 @@
     "page": {
       "name": "page",
       "in": "query",
-      "description": "Page number.",
+      "description": "Page number. Defaults to 1.",
       "type": "integer"
     },
     "perPage": {
@@ -64,7 +64,8 @@
             "in": "path",
             "description": "The identifier of the athlete. Must match the authenticated athlete.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -574,162 +575,36 @@
         }
       }
     },
-    "/segments/{id}/leaderboard": {
-      "get": {
-        "operationId": "getLeaderboardBySegmentId",
-        "summary": "Get Segment Leaderboard",
-        "description": "Returns the specified segment leaderboard.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The identifier of the segment leaderboard.",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "gender",
-            "in": "query",
-            "description": "Filter by gender.",
-            "type": "string",
-            "enum": [
-              "M",
-              "F"
-            ]
-          },
-          {
-            "name": "age_group",
-            "in": "query",
-            "description": "Summit Feature. Filter by age group.",
-            "type": "string",
-            "enum": [
-              "0_19",
-              "20_24",
-              "25_34",
-              "35_44",
-              "45_54",
-              "55_64",
-              "65_69",
-              "70_74",
-              "75_plus"
-            ]
-          },
-          {
-            "name": "weight_class",
-            "in": "query",
-            "description": "Summit Feature. Filter by weight class.",
-            "type": "string",
-            "enum": [
-              "0_124",
-              "125_149",
-              "150_164",
-              "165_179",
-              "180_199",
-              "200_224",
-              "225_249",
-              "250_plus",
-              "0_54",
-              "55_64",
-              "65_74",
-              "75_84",
-              "85_94",
-              "95_104",
-              "105_114",
-              "115_plus"
-            ]
-          },
-          {
-            "name": "following",
-            "in": "query",
-            "description": "Filter by friends of the authenticated athlete.",
-            "type": "boolean"
-          },
-          {
-            "name": "club_id",
-            "in": "query",
-            "description": "Filter by club.",
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "date_range",
-            "in": "query",
-            "description": "Filter by date range, will be in the athlete's timezone",
-            "type": "string",
-            "enum": [
-              "this_year",
-              "this_month",
-              "this_week",
-              "today"
-            ]
-          },
-          {
-            "name": "context_entries",
-            "in": "query",
-            "type": "integer"
-          },
-          {
-            "$ref": "#/parameters/page"
-          },
-          {
-            "$ref": "#/parameters/perPage"
-          }
-        ],
-        "tags": [
-          "Segments"
-        ],
-        "responses": {
-          "200": {
-            "description": "Representation of a segment leaderboard.",
-            "schema": {
-              "$ref": "https://developers.strava.com/swagger/segment_leaderboard.json#/SegmentLeaderboard"
-            },
-            "examples": {
-              "application/json": {
-                "effort_count": 30756,
-                "entry_count": 30756,
-                "kom_type": "kom",
-                "entries": [
-                  {
-                    "athlete_name": "Peter S.",
-                    "elapsed_time": 346,
-                    "moving_time": 346,
-                    "start_date": "1993-04-03T15:37:43Z",
-                    "start_date_local": "1993-04-03T07:37:43Z",
-                    "rank": 1
-                  }
-                ]
-              }
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "https://developers.strava.com/swagger/fault.json#/Fault"
-            }
-          }
-        }
-      }
-    },
-    "/segments/{id}/all_efforts": {
+    "/segment_efforts": {
       "get": {
         "operationId": "getEffortsBySegmentId",
         "summary": "List Segment Efforts",
-        "description": "Returns a set of the authenticated athlete's segment efforts for a given segment.",
+        "description": "Returns a set of the authenticated athlete's segment efforts for a given segment.  Requires subscription.",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
+            "name": "segment_id",
+            "in": "query",
             "description": "The identifier of the segment.",
             "required": true,
             "type": "integer"
           },
           {
-            "$ref": "#/parameters/page"
+            "name": "start_date_local",
+            "in": "query",
+            "description": "ISO 8601 formatted date time.",
+            "type": "string",
+            "format": "date-time"
           },
           {
-            "$ref": "#/parameters/perPage"
+            "name": "end_date_local",
+            "in": "query",
+            "description": "ISO 8601 formatted date time.",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "$ref": "#/parameters/perPage",
+            "in": "query"
           }
         ],
         "tags": [
@@ -905,7 +780,7 @@
       "get": {
         "operationId": "getSegmentEffortById",
         "summary": "Get Segment Effort",
-        "description": "Returns a segment effort from an activity that is owned by the authenticated athlete.",
+        "description": "Returns a segment effort from an activity that is owned by the authenticated athlete. Requires subscription.",
         "parameters": [
           {
             "name": "id",
@@ -1002,7 +877,8 @@
             "in": "path",
             "description": "The identifier of the running race.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -1914,7 +1790,8 @@
             "in": "path",
             "description": "The identifier of the activity.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -2061,7 +1938,8 @@
             "in": "path",
             "description": "The identifier of the club.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -2122,7 +2000,8 @@
             "in": "path",
             "description": "The identifier of the club.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           {
             "$ref": "#/parameters/page"
@@ -2176,7 +2055,8 @@
             "in": "path",
             "description": "The identifier of the club.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           {
             "$ref": "#/parameters/page"
@@ -2227,7 +2107,8 @@
             "in": "path",
             "description": "The identifier of the club.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           {
             "$ref": "#/parameters/page"
@@ -2390,7 +2271,8 @@
             "in": "path",
             "description": "The identifier of the route.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -2416,15 +2298,8 @@
       "get": {
         "operationId": "getRoutesByAthleteId",
         "summary": "List Athlete Routes",
-        "description": "Returns a list of the routes created by the authenticated athlete using their athlete ID. Private routes are filtered out unless requested by a token with read_all scope.",
+        "description": "Returns a list of the routes created by the authenticated athlete. Private routes are filtered out unless requested by a token with read_all scope.",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The identifier of the athlete.",
-            "required": true,
-            "type": "integer"
-          },
           {
             "$ref": "#/parameters/page"
           },
@@ -2465,7 +2340,8 @@
             "in": "path",
             "description": "The identifier of the route.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -2503,7 +2379,8 @@
             "in": "path",
             "description": "The identifier of the route.",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
