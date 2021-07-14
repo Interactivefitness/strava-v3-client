@@ -7,7 +7,7 @@ Polly.register(NodeHttpAdapter);
 Polly.register(FSPersister);
 
 let context = setupPolly({
-  adapters: ["node-http"],
+  adapters: [NodeHttpAdapter],
   mode: "replay",
   logging: false,
   recordIfMissing: false,
@@ -31,7 +31,7 @@ let context = setupPolly({
       hash: false
     }
   },
-  persister: "fs",
+  persister: FSPersister,
   persisterOptions: {
     fs: {
       recordingsDir: "./test/__recordings__"
